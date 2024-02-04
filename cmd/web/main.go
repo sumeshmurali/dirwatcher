@@ -113,14 +113,14 @@ func setupRouter() *gin.Engine {
 		if err != nil {
 			log.Printf("GET /trigger: repo.GetTaskConfig() caused %v\n", err)
 			apiResponse.Error = "Internal Server Error"
-			ctx.JSON(http.StatusBadRequest, apiResponse)
+			ctx.JSON(http.StatusInternalServerError, apiResponse)
 			return
 		}
 		p, err := json.Marshal(taskConfig)
 		if err != nil {
 			log.Printf("GET /trigger: json.Marshal(%+v) caused %v", taskConfig, err)
 			apiResponse.Error = "Internal Server Error"
-			ctx.JSON(http.StatusBadRequest, apiResponse)
+			ctx.JSON(http.StatusInternalServerError, apiResponse)
 			return
 		}
 		task := asynq.NewTask(internal.DirWatcherTask, p)
@@ -128,7 +128,7 @@ func setupRouter() *gin.Engine {
 		if err != nil {
 			log.Printf("GET /trigger: asynqClient.Enqueue(%+v) caused %v", task, err)
 			apiResponse.Error = "Internal Server Error"
-			ctx.JSON(http.StatusBadRequest, apiResponse)
+			ctx.JSON(http.StatusInternalServerError, apiResponse)
 			return
 		}
 		apiResponse.Success = true
