@@ -41,11 +41,11 @@ Once the services are up and running you should see logs from gin saying the ser
 ## Directory Watcher API Endpoints
 
 #### Response Schema
-```json
+```js
 {
-	"success": bool,	// indicate whether the request was success or not
-	"data": any		    // results assosciated with successful requests 
-	"error": string     // error messages associated with failed responses
+	"success":  bool,	// indicate whether the request was success or not
+	"data":     any,		    // results assosciated with successful requests 
+	"error":    string     // error messages associated with failed responses
 }
 ```
 
