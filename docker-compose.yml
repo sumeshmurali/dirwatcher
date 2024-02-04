@@ -1,0 +1,38 @@
+version: '3.4'
+services:
+  db:
+    image: mongo:5.0.24-focal
+    restart: always
+  
+  redis:
+    image: redis:7.2.4
+    restart: always
+  
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: final
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./examples:/code/target
+    env_file:
+      - .env.docker
+    entrypoint: taskmgr
+
+  web:
+    build:
+      context: .
+      target: final
+    depends_on:
+      - db
+      - redis
+      - worker
+    env_file:
+      - .env.docker
+    ports:
+      - 8080:8080
+    entrypoint: web
+  
