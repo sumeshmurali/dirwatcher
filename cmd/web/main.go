@@ -48,7 +48,7 @@ func setupRouter() *gin.Engine {
 		if p := ctx.Query("page"); p != "" {
 			pi, err := strconv.Atoi(p)
 			if err != nil || pi < 1 {
-				log.Printf("GET /results: Parameter page=%v failed to parse with %v\n", p, err)
+				log.Printf("GET /results: Parameter page=%v failed validation/parsing with %v\n", p, err)
 				apiResponse.Error = "page should be a positive integer (>1)"
 				ctx.JSON(http.StatusBadRequest, apiResponse)
 				return
