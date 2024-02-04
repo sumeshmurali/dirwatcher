@@ -178,3 +178,7 @@ Edit the .env file for local deployments.
 |PAGINATION_SIZE        |10                 | Default pagination size for /results  |
 |TASKMGR_SYNC_INTERVAL  |1s                 | Sync interval for task manager        |
 |API_ADDR               |:8080              | API bind adddress                     |
+
+## Database Schema
+
+![db schema](schema.jpg "Schema")
